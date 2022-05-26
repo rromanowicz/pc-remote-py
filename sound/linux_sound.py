@@ -1,23 +1,21 @@
-import os
-
-
-def run_cmd(cmd):
-    stream = os.popen(cmd)
-    return stream.read()
+from tools import tools
 
 
 class LinuxSound:
-    __cmd = "pactl -- set-sink-volume "
-    __sink = "pactl list sinks | grep -B 1 RUNNING | grep -oP '(?<=#).*'"
+    __cmd = tools.commands['linux']['sound']['cmd']
+    __sink = tools.commands['linux']['sound']['sink']
 
     def increase_volume(self, val: int):
-        run_cmd(self.__cmd + run_cmd(self.__sink).replace('\n', '') + " +" + str(val) + "%")
+        tools.run_term_command(
+            self.__cmd.format(tools.run_term_command(self.__sink).replace('\n', ''), "+", str(val)))
 
     def decrease_volume(self, val: int):
-        run_cmd(self.__cmd + run_cmd(self.__sink).replace('\n', '') + " -" + str(val) + "%")
+        tools.run_term_command(
+            self.__cmd.format(tools.run_term_command(self.__sink).replace('\n', ''), "-", str(val)))
 
     def set_volume(self, val: int):
-        run_cmd(self.__cmd + run_cmd(self.__sink).replace('\n', '') + " " + str(val) + "%")
+        tools.run_term_command(
+            self.__cmd.format(tools.run_term_command(self.__sink).replace('\n', ''), "", str(val)))
 
     def mute(self):
         self.set_volume(0)

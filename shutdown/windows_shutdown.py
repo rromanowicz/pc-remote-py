@@ -1,5 +1,5 @@
 import logging
-import os
+from tools import tools
 import threading
 from datetime import datetime, timedelta
 
@@ -8,19 +8,16 @@ class WindowsShutdown:
     __fmt = "%(asctime)s: %(message)s"
     logging.basicConfig(format=__fmt, level=logging.INFO, datefmt="%H:%M:%S")
 
+    __cmd = tools.commands['windows']['shutdown']['cmd']
     __type = ""
     __time_started: datetime.time
     __minutes: int
     __thread: threading.Timer = None
 
-    def __run_cmd(self, schedule_type):
-        stream = os.popen("C:\\nircmd.exe {}".format(schedule_type))
-        return stream.read()
-
     def __exec_thread(self, minutes: int):
         self.__time_started = datetime.now().time()
         self.__minutes = minutes
-        self.__thread = threading.Timer(float(minutes * 60), self.__run_cmd, [self.__type])
+        self.__thread = threading.Timer(float(minutes * 60), tools.run_term_command, [self.__cmd.format(self.__type)])
         self.__thread.start()
 
     def __cancel_thread(self):

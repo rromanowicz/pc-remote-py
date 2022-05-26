@@ -1,46 +1,35 @@
-import os
+from tools import tools
 
 
 class MediaKeys:
-    __path_to_file = "C:\\nircmd.exe"
-    __cmd = "{} sendkey {} press"
-
-    def __run_cmd(self, key: str):
-        stream = os.popen(self.__cmd.format(self.__path_to_file, key))
-        return stream.read()
+    __cmd = tools.commands['windows']['mediaKeys']['cmd']
 
     def next_track(self):
-        self.__run_cmd("0xB0")
+        tools.run_term_command(self.__cmd.format("0xB0"))
 
     def prev_track(self):
-        self.__run_cmd("0xB1")
+        tools.run_term_command(self.__cmd.format("0xB1"))
 
     def play_pause(self):
-        self.__run_cmd("0xB3")
+        tools.run_term_command(self.__cmd.format("0xB3"))
 
     def right(self):
-        self.__run_cmd("0x27")
+        tools.run_term_command(self.__cmd.format("0x27"))
 
     def left(self):
-        self.__run_cmd("0x25")
+        tools.run_term_command(self.__cmd.format("0x25"))
 
     def up(self):
-        self.__run_cmd("0x26")
+        tools.run_term_command(self.__cmd.format("0x26"))
 
     def down(self):
-        self.__run_cmd("0x28")
+        tools.run_term_command(self.__cmd.format("0x28"))
 
     def spacebar(self):
-        self.__run_cmd("0x20")
+        tools.run_term_command(self.__cmd.format("0x20"))
 
     def esc(self):
-        self.__run_cmd("0x1B")
+        tools.run_term_command(self.__cmd.format("0x1B"))
 
     def enter(self):
-        self.__run_cmd("0x0D")
-
-
-
-if __name__ == '__main__':
-    media = MediaKeys()
-    media.next_track()
+        tools.run_term_command(self.__cmd.format("0xB0"))

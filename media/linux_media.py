@@ -1,39 +1,35 @@
-import os
+from tools import tools
 
 
 class MediaKeys:
-    __cmd = "xdotool key "
-
-    def __run_cmd(self, key: str):
-        stream = os.popen(self.__cmd + key)
-        return stream.read()
+    __cmd = tools.commands['linux']['mediaKeys']['cmd']
 
     def next_track(self):
-        self.__run_cmd("XF86AudioNext")
+        tools.run_term_command(self.__cmd.format("XF86AudioNext"))
 
     def prev_track(self):
-        self.__run_cmd("XF86AudioPrev")
+        tools.run_term_command(self.__cmd.format("XF86AudioPrev"))
 
     def play_pause(self):
-        self.__run_cmd("XF86AudioPlay")
+        tools.run_term_command(self.__cmd.format("XF86AudioPlay"))
 
     def right(self):
-        self.__run_cmd("Right")
+        tools.run_term_command(self.__cmd.format("Right"))
 
     def left(self):
-        self.__run_cmd("Left")
+        tools.run_term_command(self.__cmd.format("Left"))
 
     def up(self):
-        self.__run_cmd("Up")
+        tools.run_term_command(self.__cmd.format("Up"))
 
     def down(self):
-        self.__run_cmd("Down")
+        tools.run_term_command(self.__cmd.format("Down"))
 
     def spacebar(self):
-        self.__run_cmd("space")
+        tools.run_term_command(self.__cmd.format("space"))
 
     def esc(self):
-        self.__run_cmd("Escape")
+        tools.run_term_command(self.__cmd.format("Escape"))
 
     def enter(self):
-        self.__run_cmd("KP_Enter")
+        tools.run_term_command(self.__cmd.format("KP_Enter"))
