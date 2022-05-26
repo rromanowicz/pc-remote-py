@@ -19,8 +19,7 @@ Navigate to directory and run command:
 >>- [xdotool](http://manpages.ubuntu.com/manpages/trusty/man1/xdotool.1.html)
 >
 >**2. WINDOWS Host**
->>- [nircmd.exe](http://www.nirsoft.net/utils/nircmd.html) @C:\ \
-    (Running application with admin privileges automatically copies required file.)
+>>- [nircmd.exe](http://www.nirsoft.net/utils/nircmd.html) @C:\
 
 
 
