@@ -4,11 +4,14 @@ import threading
 from datetime import datetime, timedelta
 
 
-class WindowsShutdown:
+class Shutdown:
+    def __init__(self, os: str):
+        self.__os = os.lower()
+        self.__cmd = tools.commands[self.__os]['shutdown']['cmd']
+
     __fmt = "%(asctime)s: %(message)s"
     logging.basicConfig(format=__fmt, level=logging.INFO, datefmt="%H:%M:%S")
 
-    __cmd = tools.commands['windows']['shutdown']['cmd']
     __type = ""
     __time_started: datetime.time
     __minutes: int
@@ -31,17 +34,17 @@ class WindowsShutdown:
 
     def schedule_shutdown(self, minutes: int):
         logging.info("Shutdown scheduled in {} minutes.".format(minutes))
-        self.__type = 'initshutdown'
+        self.__type = tools.shutdown_types[self.__os]['shutdown']
         self.__exec_thread(minutes)
 
     def schedule_sleep(self, minutes: int):
         logging.info("Sleep scheduled in {} minutes.".format(minutes))
-        self.__type = 'standby'
+        self.__type = tools.shutdown_types[self.__os]['sleep']
         self.__exec_thread(minutes)
 
     def schedule_hibernate(self, minutes: int):
         logging.info("Hibernate scheduled in {} minutes.".format(minutes))
-        self.__type = 'hibernate'
+        self.__type = tools.shutdown_types[self.__os]['hibernate']
         self.__exec_thread(minutes)
 
     def schedule_cancel(self):

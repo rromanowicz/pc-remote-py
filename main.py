@@ -1,4 +1,4 @@
-from flask import *
+from flask import Response, Flask
 
 app = Flask(__name__)
 
@@ -14,7 +14,7 @@ def home_page():
         /ping=range={}<br>
         /qrCode=type={}&val={}
         """
-    return output
+    return Response(output, status=418, mimetype='application/json')
 
 
 if __name__ == '__main__':

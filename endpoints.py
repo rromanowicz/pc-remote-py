@@ -1,11 +1,9 @@
 from flask import request, Response
-import controllers
+from controls import controllers
 
 from __main__ import app
 
-sound = controllers.get_sound_controller()
-shutdown = controllers.get_shutdown_controller()
-media = controllers.get_media_controller()
+sound, media, shutdown = controllers.get_controllers()
 
 
 @app.route('/vol', methods=['GET'])
@@ -21,7 +19,7 @@ def volume():
         case 'set':
             sound.set_volume(val)
         case 'mute':
-            sound.mute()
+            sound.mute(0)
         case _:
             return Response('Invalid input.', status=200, mimetype='application/json')
 
