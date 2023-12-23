@@ -3,8 +3,7 @@ import os
 commands = {
     'linux': {
         'sound': {
-            'cmd': "pactl -- set-sink-volume $(pactl list sinks | grep -B 1 RUNNING | grep -oP '(?<=#).*') {}{}%",
-            'sink': "pactl list sinks | grep -B 1 RUNNING | grep -oP '(?<=#).*'"},
+            'cmd': "amixer -M set Master {}{}"},
         'mediaKeys': {
             'cmd': "xdotool key {}"},
         'shutdown': {
@@ -84,10 +83,10 @@ shutdown_types = {
 
 sound_control ={
     'linux': {
-        'incr': "+",
-        'decr': "-",
-        'set': "",
-        'mute': ""
+        'incr': "%+",
+        'decr': "%-",
+        'set': "%",
+        'mute': "toggle"
     },
     'windows': {
         'incr': "changesysvolume",
